@@ -1,4 +1,5 @@
 import csv
+from src.preprocess import cleaning
  
 def load_data(path):
     posts = []
@@ -10,7 +11,10 @@ def load_data(path):
             post = row['text']      
             label = row['Class']
 
-            posts.append(post)   
+            clean_words = cleaning(post)
+            posts.append(clean_words)
+
+            # posts.append(post)   
             labels.append(int(label))
     return posts, labels
 
@@ -18,6 +22,9 @@ def load_data(path):
 
 
 posts, labels = load_data("Use this for data.csv")
-#print(posts)
-#print("Label:", labels[0])
+# print(posts)
+for post in posts:
+    print(post)
+    print('\n')
+
 #print("Total Posts:", len(posts))

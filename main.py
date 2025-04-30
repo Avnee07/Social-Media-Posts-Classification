@@ -1,5 +1,7 @@
 import csv
 from src.preprocess import cleaning
+from src.bow import make_vocabulary
+from src.bow import all_posts_to_vectors
  
 def load_data(path):
     posts = []
@@ -23,8 +25,18 @@ def load_data(path):
 
 posts, labels = load_data("Use this for data.csv")
 # print(posts)
-for post in posts:
-    print(post)
-    print('\n')
+i = 1
+# for post in posts:
+#     print(i,post)
+#     print('\n')
+#     i = i + 1
 
-#print("Total Posts:", len(posts))
+
+vocab = make_vocabulary(posts)
+print("Vocabulary size:", len(vocab))
+print("Number of posts:", len(posts))
+
+X = all_posts_to_vectors(posts, vocab)
+y = labels
+
+# print(X)
